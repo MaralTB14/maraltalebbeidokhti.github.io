@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maral Talebbeidokhti — Cybersecurity &amp; AI Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EEF0EC;
+    --paper-raised: #E4E8E1;
+    --ink: #12181F;
+    --ink-soft: #4C5761;
+    --teal: #1F6F6B;
+    --teal-deep: #143F3D;
+    --amber: #D99A44;
+    --line: #CBD1C6;
+    --maxw: 760px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(238,240,236,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .nav-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-size: 0.92rem;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .nav-links a:hover { color: var(--teal-deep); border-color: var(--teal); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 64px 28px 40px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    color: var(--teal-deep);
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: clamp(2.3rem, 5vw, 3.4rem);
+    letter-spacing: -0.01em;
+  }
+  .hero-role {
+    margin-top: 14px;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  .hero-links {
+    margin-top: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 22px;
+    font-size: 0.94rem;
+  }
+  .hero-links a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--teal);
+    padding-bottom: 1px;
+  }
+  .hero-links a:hover { color: var(--teal-deep); }
+
+  .hero-art { width: 100%; height: auto; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 46px 0; border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: none; }
+
+  .section-label {
+    font-size: 0.9rem;
+    color: var(--teal-deep);
+    margin-bottom: 18px;
+  }
+
+  h2 { font-size: 1.7rem; margin-bottom: 20px; }
+
+  .lede {
+    font-size: 1.05rem;
+    max-width: 62ch;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Research chips ---------- */
+  .interest-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .interest-list span {
+    border: 1px solid var(--teal);
+    color: var(--teal-deep);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 0.92rem;
+  }
+
+  /* ---------- Timeline ---------- */
+  .timeline {
+    position: relative;
+    margin-top: 30px;
+    padding-left: 26px;
+    border-left: 2px solid var(--line);
+  }
+  .t-item {
+    position: relative;
+    padding-bottom: 30px;
+  }
+  .t-item:last-child { padding-bottom: 0; }
+  .t-item::before {
+    content: "";
+    position: absolute;
+    left: -31px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--teal);
+  }
+  .t-item.current::before { background: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
+  .t-date {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .t-role {
+    font-family: 'Fraunces', serif;
+    font-size: 1.12rem;
+    font-weight: 500;
+  }
+  .t-org { color: var(--teal-deep); font-size: 0.98rem; margin-top: 1px; }
+  .t-desc {
+    margin-top: 8px;
+    color: var(--ink-soft);
+    font-size: 0.96rem;
+    max-width: 60ch;
+  }
+  .t-desc ul { margin: 6px 0 0; padding-left: 18px; }
+  .t-desc li { margin-bottom: 4px; }
+
+  /* ---------- Publications ---------- */
+  .pub-empty {
+    margin-top: 18px;
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    padding: 22px 24px;
+    color: var(--ink-soft);
+    font-size: 0.96rem;
+    background: var(--paper-raised);
+  }
+
+  .pub-list { margin-top: 20px; display: flex; flex-direction: column; gap: 22px; }
+  .pub-item {
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .pub-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .pub-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.12rem;
+    font-weight: 500;
+    max-width: 58ch;
+  }
+  .pub-authors {
+    margin-top: 6px;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+  }
+  .pub-authors strong { color: var(--ink); font-weight: 600; }
+  .pub-venue {
+    margin-top: 4px;
+    font-size: 0.9rem;
+    color: var(--teal-deep);
+  }
+  .pub-links {
+    margin-top: 10px;
+    display: flex;
+    gap: 18px;
+    font-size: 0.9rem;
+  }
+  .pub-links a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--teal);
+    padding-bottom: 1px;
+  }
+  .pub-links a:hover { color: var(--teal-deep); }
+
+  /* ---------- Skills / grid ---------- */
+  .grid-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 34px;
+    margin-top: 8px;
+  }
+  .subhead {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  .plain-list { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.96rem; }
+  .plain-list li { margin-bottom: 6px; }
+
+  .lang-row { display: flex; justify-content: space-between; max-width: 320px; margin-bottom: 6px; font-size: 0.96rem; }
+  .lang-row span:last-child { color: var(--ink-soft); }
+
+  /* ---------- Awards ---------- */
+  .award-list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .award-row {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    font-size: 0.98rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .award-row:last-child { border-bottom: none; }
+  .award-mark { color: var(--amber); font-family: 'Fraunces', serif; }
+
+  /* ---------- Footer / contact ---------- */
+  footer {
+    background: var(--teal-deep);
+    color: #EAF3F1;
+    padding: 56px 0 46px;
+    margin-top: 20px;
+  }
+  footer .wrap { max-width: 760px; }
+  footer h2 { color: #fff; }
+  footer a { color: #EAF3F1; text-decoration: none; border-bottom: 1px solid rgba(234,243,241,0.4); }
+  footer a:hover { border-color: #EAF3F1; }
+  .foot-links { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 0.98rem; }
+  .foot-note { margin-top: 34px; font-size: 0.85rem; color: rgba(234,243,241,0.55); }
+
+  @media (max-width: 720px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-art { max-width: 220px; margin: 0 auto; }
+    .grid-two { grid-template-columns: 1fr; gap: 26px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .draw-line { stroke-dasharray: 200; stroke-dashoffset: 200; animation: draw 1.4s ease forwards 0.2s; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    .node-pop { opacity: 0; animation: pop 0.5s ease forwards; }
+    @keyframes pop { to { opacity: 1; } }
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--teal-deep);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-mark">Maral Talebbeidokhti</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#publications">Publications</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Ph.D. Student &amp; Graduate Research Assistant · Electrical &amp; Computer Engineering</div>
+    <h1>Maral<br>Talebbeidokhti</h1>
+    <p class="hero-role">Cybersecurity and AI researcher at Old Dominion University, working toward more adaptive and autonomous security systems — grounded in years of hands-on network and IT experience.</p>
+    <div class="hero-links">
+      <a href="mailto:itsmaral.tb@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/maraltalebbeidokhti" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://orcid.org/0009-0005-0442-7866" target="_blank" rel="noopener">ORCID</a>
+      <a href="https://maraltb14.wixsite.com/mysite" target="_blank" rel="noopener">Portfolio</a>
+    </div>
+  </div>
+  <svg class="hero-art" viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line class="draw-line" x1="60" y1="40" x2="140" y2="100" stroke="#1F6F6B" stroke-width="1.5"/>
+    <line class="draw-line" x1="140" y1="100" x2="210" y2="60" stroke="#1F6F6B" stroke-width="1.5"/>
+    <line class="draw-line" x1="140" y1="100" x2="90" y2="170" stroke="#1F6F6B" stroke-width="1.5"/>
+    <line class="draw-line" x1="140" y1="100" x2="200" y2="170" stroke="#CBD1C6" stroke-width="1.5"/>
+    <line class="draw-line" x1="60" y1="40" x2="20" y2="110" stroke="#CBD1C6" stroke-width="1.5"/>
+    <circle class="node-pop" cx="60" cy="40" r="7" fill="#1F6F6B" style="animation-delay:.3s"/>
+    <circle class="node-pop" cx="140" cy="100" r="9" fill="#D99A44" style="animation-delay:.6s"/>
+    <circle class="node-pop" cx="210" cy="60" r="6" fill="#1F6F6B" style="animation-delay:.9s"/>
+    <circle class="node-pop" cx="90" cy="170" r="6" fill="#1F6F6B" style="animation-delay:1.0s"/>
+    <circle class="node-pop" cx="200" cy="170" r="5" fill="#CBD1C6" style="animation-delay:1.1s"/>
+    <circle class="node-pop" cx="20" cy="110" r="5" fill="#CBD1C6" style="animation-delay:1.2s"/>
+  </svg>
+</div>
+
+<div class="wrap">
+
+  <section id="about">
+    <div class="section-label">About</div>
+    <h2>Bridging real-world networks and intelligent security</h2>
+    <p class="lede" style="margin-top:16px;">
+      I'm a Ph.D. student in Electrical and Computer Engineering at Old Dominion University, focused on cybersecurity and artificial intelligence — particularly how AI can support more adaptive, autonomous security systems. Before starting my Ph.D., I worked across IT and network support roles, where I gained hands-on experience with network monitoring, troubleshooting, endpoint security, and infrastructure management. I hold an M.S. in Cybersecurity and Networks from the University of New Haven, and I'm drawn to research that stays connected to real operational challenges in security.
+    </p>
+  </section>
+
+  <section id="research">
+    <div class="section-label">Research Interests</div>
+    <h2>What I'm working on</h2>
+    <div class="interest-list">
+      <span>Cybersecurity</span>
+      <span>Artificial Intelligence</span>
+      <span>AI for Cybersecurity</span>
+      <span>Agentic AI</span>
+      <span>Network Security</span>
+      <span>Privacy &amp; Trust</span>
+      <span>Autonomous Security</span>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-label">Experience</div>
+    <h2>Where I've worked</h2>
+    <div class="timeline">
+
+      <div class="t-item current">
+        <div class="t-date">Aug 2026 – May 2027</div>
+        <div class="t-role">Graduate Research Assistant</div>
+        <div class="t-org">Old Dominion University · Department of Electrical &amp; Computer Engineering</div>
+        <div class="t-desc">
+          <ul>
+            <li>Awarded a Graduate Research Assistantship supporting research within the ECE department, under Dr. Hossein Sarrafzadeh</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-date">Jul 2025 – Aug 2026</div>
+        <div class="t-role">IT Support Specialist</div>
+        <div class="t-org">Click It Solutions · New Haven County, CT</div>
+        <div class="t-desc">
+          <ul>
+            <li>Provided remote IT support and troubleshooting for business and home-user clients</li>
+            <li>Managed networks, endpoints, and Windows environments using UniFi, Domotz, Splashtop, and Active Directory</li>
+            <li>Supported endpoint security with Microsoft Defender and Avast, resolving alerts and compatibility issues</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-date">Jan 2025 – Jun 2025</div>
+        <div class="t-role">Network Engineer</div>
+        <div class="t-org">University of New Haven · West Haven, CT</div>
+        <div class="t-desc">
+          <ul>
+            <li>Monitored and maintained the performance, reliability, and security of routers, switches, firewalls, and servers</li>
+            <li>Performed system updates and upgrades, and responded to network outages to minimize downtime</li>
+            <li>Managed wired and wireless infrastructure, and maintained records of configurations and incidents</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-date">Jul 2024 – May 2025</div>
+        <div class="t-role">IT Support Specialist</div>
+        <div class="t-org">University of New Haven</div>
+        <div class="t-desc">
+          <ul>
+            <li>Supported students, faculty, and staff with hardware, software, and network issues</li>
+            <li>Troubleshot Windows and macOS systems, printers, and campus IT equipment</li>
+            <li>Assisted with account management, workstation setup, and service record-keeping</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-date">May 2022 – Oct 2022</div>
+        <div class="t-role">IT Support Specialist</div>
+        <div class="t-org">Department of Environmental Protection · Semnan, Iran</div>
+        <div class="t-desc">
+          <ul>
+            <li>Supported lab systems, focusing on reliability, data security, and user satisfaction</li>
+            <li>Managed DNS and DHCP scopes during upgrades and supported routing checks during deployments</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-date">Sep 2020 – Jan 2021</div>
+        <div class="t-role">Website Manager</div>
+        <div class="t-org">Aroj Institute · Semnan, Iran</div>
+        <div class="t-desc">
+          <ul>
+            <li>Maintained the institute's website, focusing on usability and mobile responsiveness</li>
+            <li>Managed content including schedules, announcements, and blog posts alongside instructors and staff</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-date">Jan 2019 – Jan 2022</div>
+        <div class="t-role">English Teacher</div>
+        <div class="t-org">Aroj Institute · Semnan, Iran</div>
+        <div class="t-desc">
+          <ul>
+            <li>Taught English to children ages 3–7 using interactive, age-appropriate methods</li>
+            <li>Developed lesson plans and materials, and built strong relationships with students and parents</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-date">Jan 2018 – Jan 2020</div>
+        <div class="t-role">Network &amp; Technical Support</div>
+        <div class="t-org">Amin Rayaneh Semnan · Semnan, Iran</div>
+        <div class="t-desc">
+          <ul>
+            <li>Resolved hardware, software, and network issues across a multi-user environment</li>
+            <li>Handled installations, updates, and routine backup and restore procedures</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-label">Education</div>
+    <h2>Academic background</h2>
+    <div class="timeline">
+      <div class="t-item current">
+        <div class="t-date">Expected Aug 2026</div>
+        <div class="t-role">Ph.D., Electrical &amp; Computer Engineering — Cybersecurity</div>
+        <div class="t-org">Old Dominion University</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">Aug 2023 – May 2025</div>
+        <div class="t-role">M.S., Cybersecurity and Networks</div>
+        <div class="t-org">University of New Haven</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2018 – 2022</div>
+        <div class="t-role">B.S., Computer Engineering</div>
+        <div class="t-org">Islamic Azad University</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="section-label">Publications</div>
+    <h2>Papers &amp; preprints</h2>
+    <div class="pub-list">
+      <div class="pub-item">
+        <div class="pub-title">Cybersecurity in Action: Unraveling the Effects of Individual, Social, and Organizational Determinants</div>
+        <div class="pub-authors">Somayye Nasiri, Shahram Shahabi, Aynaz Shafiesabet, <strong>Maral Talebbeidokhti</strong>, Elmira Alvandi Behineh</div>
+        <div class="pub-venue">Tehnički Glasnik (Technical Journal), Vol. 20, No. 2 (2026), pp. 195–204</div>
+        <div class="pub-links">
+          <a href="https://doi.org/10.31803/tg-20240627004731" target="_blank" rel="noopener">DOI</a>
+          <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=3GOXI84AAAAJ&amp;citation_for_view=3GOXI84AAAAJ:u-x6o8ySG0sC" target="_blank" rel="noopener">Google Scholar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-label">Skills &amp; Certifications</div>
+    <h2>Tools &amp; capabilities</h2>
+    <div class="grid-two">
+      <div>
+        <div class="subhead">Technical Skills</div>
+        <ul class="plain-list">
+          <li>Network monitoring &amp; troubleshooting</li>
+          <li>Endpoint security (Microsoft Defender, Avast)</li>
+          <li>Active Directory, DNS/DHCP administration</li>
+          <li>UniFi, Domotz, Splashtop</li>
+          <li>JavaScript, AJAX</li>
+          <li>Teaching English as a Second Language</li>
+        </ul>
+        <div class="subhead" style="margin-top:22px;">Certifications</div>
+        <ul class="plain-list">
+          <li>Server Administration Essential Training</li>
+          <li>HIPAA Security</li>
+        </ul>
+      </div>
+      <div>
+        <div class="subhead">Languages</div>
+        <div class="lang-row"><span>Persian</span><span>Native / Bilingual</span></div>
+        <div class="lang-row"><span>English</span><span>Professional Working</span></div>
+        <div class="lang-row"><span>Turkish</span><span>Limited Working</span></div>
+        <div class="lang-row"><span>German</span><span>Elementary</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="awards">
+    <div class="section-label">Honors &amp; Awards</div>
+    <h2>Beyond the lab</h2>
+    <div class="award-list">
+      <div class="award-row"><span class="award-mark">—</span><span>2025 Workplace Ninjas US Scholarship Recipient</span></div>
+      <div class="award-row"><span class="award-mark">—</span><span>First Place, Inline Speed Skating</span></div>
+      <div class="award-row"><span class="award-mark">—</span><span>Top 10, Inline Speed Skating National Championship</span></div>
+      <div class="award-row"><span class="award-mark">—</span><span>Second Place, Chess Championship</span></div>
+      <div class="award-row"><span class="award-mark">—</span><span>Second Place, Volleyball Team Championship (Semnan City)</span></div>
+    </div>
+  </section>
+
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p style="margin-top:14px; color:rgba(234,243,241,0.8); max-width:52ch;">
+      Open to conversations about cybersecurity, AI, and research collaboration — feel free to reach out.
+    </p>
+    <div class="foot-links">
+      <a href="mailto:itsmaral.tb@gmail.com">itsmaral.tb@gmail.com</a>
+      <a href="https://www.linkedin.com/in/maraltalebbeidokhti" target="_blank" rel="noopener">linkedin.com/in/maraltalebbeidokhti</a>
+      <a href="https://orcid.org/0009-0005-0442-7866" target="_blank" rel="noopener">orcid.org/0009-0005-0442-7866</a>
+    </div>
+    <div class="foot-note">Virginia Beach, Virginia · Updated 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
